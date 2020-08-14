@@ -5,8 +5,7 @@ FROM golang:latest
 WORKDIR /go/src/github.com/tomcuzz/Termovision-Frontend/src
 
 # Setup environment veriables
-ENV HK_PIN="00102003"
-ENV HK_SERIAL="027TC-000001"
+ENV BACKEND_ADDRESS="0.0.0.0"
 
 # Copy the source from the current directory to the Working Directory inside the container
 COPY ./src .
@@ -21,4 +20,4 @@ RUN go build -o main main.go
 EXPOSE 8080
 
 # Command to run the executable
-CMD ./main -hkpin ${HK_PIN} -hkserial ${HK_SERIAL}
+CMD ./main -backend ${BACKEND_ADDRESS}
