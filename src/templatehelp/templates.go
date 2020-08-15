@@ -4,11 +4,14 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strings"
 )
 
 // BuildPage build page for template.
 func BuildPage(w http.ResponseWriter, t string, i interface{}) {
-	ti, err := template.ParseFiles(
+	ti, err := template.New("").Funcs(template.FuncMap{
+		"secend": func(i, j int) bool { return i%j == j-1 },
+	}).ParseFiles(
 		t,
 		"templates/base.html",
 	)
@@ -17,10 +20,10 @@ func BuildPage(w http.ResponseWriter, t string, i interface{}) {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-
-	err = ti.Execute(w, i)
+	bta := strings.Split(t, "/")
+	bt := bta[len(bta)-1]
+	err = ti.ExecuteTemplate(w, bt, i)
 	if err != nil {
-		log.Println(err.Error())
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 }
