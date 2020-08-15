@@ -5,7 +5,6 @@ FROM golang:latest
 WORKDIR /go/src/github.com/tomcuzz/Termovision-Frontend/src
 
 # Setup environment veriables
-ENV SERVER_ADDRESS=":8080"
 ENV BACKEND_ADDRESSES="0.0.0.0"
 
 # Copy the source from the current directory to the Working Directory inside the container
@@ -21,4 +20,4 @@ RUN go build -o main main.go
 EXPOSE 8080
 
 # Command to run the executable
-CMD ["./main", "--server_address ${SERVER_ADDRESS}", "--backend_addresses ${BACKEND_ADDRESSES}"]
+CMD ["./main", "--backend_addresses ${BACKEND_ADDRESSES}"]

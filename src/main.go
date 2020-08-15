@@ -10,7 +10,6 @@ import (
 )
 
 var (
-	server_address string
 	backend_addresses string
 )
 
@@ -23,12 +22,11 @@ func main() {
 	buildhandlers()
 
 	// Run server
-	fmt.Println("Stating server on: ", server_address)
-	log.Fatal(http.ListenAndServe(server_address, nil))
+	fmt.Println("Stating server on port 8080")
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
 func parseFlags() {
-	flag.StringVar(&server_address, "server_address", ":8080", "Address to run webserver on")
 	flag.StringVar(&backend_addresses, "backend_addresses", "", "Comma seperated list of backend server addresses (can have host:port if needed)")
 
 	flag.Parse()
