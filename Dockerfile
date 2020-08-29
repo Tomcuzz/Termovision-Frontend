@@ -20,4 +20,4 @@ RUN go build -o main main.go
 EXPOSE 8080
 
 # Command to run the executable
-CMD ["./main", "--backend_addresses ${BACKEND_ADDRESSES}"]
+CMD ./main -backend_addresses ${BACKEND_ADDRESSES}
